@@ -13236,10 +13236,16 @@ __webpack_require__.r(__webpack_exports__);
 var ApiConstants = /** @class */ (function () {
     function ApiConstants() {
     }
-    ApiConstants.siteTitle = "vCloud";
-    ApiConstants.webURL = "http://127.0.0.1:3000";
-    ApiConstants.baseURL = "http://127.0.0.1:3000/api";
-    ApiConstants.apiURL = "http://127.0.0.1:3000/api"; //dont use this
+    ApiConstants.siteTitle = "Viztors";
+    //for local
+    // public static webURL: string = "http://127.0.0.1:3000";
+    // public static baseURL: string = "http://127.0.0.1:3000/api";
+    // public static apiURL: string = "http://127.0.0.1:3000/api"; //dont use this
+    //for production
+    ApiConstants.webURL = "http://3.6.8.191:3000";
+    ApiConstants.baseURL = "http://3.6.8.191:3000/api";
+    ApiConstants.apiURL = "http://3.6.8.191:3000/api"; //dont use this
+    //api version
     ApiConstants.apiVersion = "v1";
     //roles
     ApiConstants.roles = "roles";

@@ -1,0 +1,281 @@
+<ngx-spinner>
+  <p style="font-size: 20px; color: white">{{loaderSpinnerMessage}}</p>
+</ngx-spinner>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div *ngIf="visitorCategory" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Visitor Type</button>
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+          <div class="card-body">
+            <div class="row mb-5">
+              <ng-container *ngFor="let visitorCategory of visitorCategories; let i= index;">
+                <div (click)="selectedVisitorCategory(visitorCategory)" class="col-lg-3 col-md-6 col-sm-6"
+                  [ngClass]="i%2==0 ? 'float-left' : 'float-right'">
+                  <div class="card border-0">
+                    <img
+                      *ngIf="visitorCategory.backgroundImagePath && visitorCategory.backgroundImagePath!==null; else dummyImage;"
+                      [src]="visitorCategory.backgroundImagePath" class="rounded-circle" [alt]="visitorCategory.name"
+                      width="200" height="200">
+
+                    <ng-template #dummyImage>
+                      <img src="./assets/img/visitorType.png" class="rounded-circle" alt="Visitor Type" width="200"
+                        height="200">
+                    </ng-template>
+                    <div class="card-body">
+                      <h5 class="card-title ml-5">{{visitorCategory.name}}</h5>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="contact">
+        <app-contact (contact)=contactEventParent($event)></app-contact>
+      </div>
+
+      <div *ngIf="image" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <!-- <button [routerLink]="['home']" class="btn btn-sm text-white float-left">Cancel</button> -->
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Profile Image</button>
+            <!-- <button class="btn btn-sm text-white float-right" (click)="backClicked()">Back</button> -->
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+          <div class="card-body">
+            <app-camera *ngIf="!webcamImage" (pictureTaken)="handleImage($event)">
+            </app-camera>
+            <div class="snapshot" *ngIf="!webcamImage">
+              <div class="actionBtn">
+                <button type="button" class="btn btn-success mr-3">{{timeLeft + " seconds remaining"}}</button>
+              </div>
+            </div>
+            <div *ngIf="webcamImage" class="snapshot">
+              <img class="show-snapshot" [src]="webcamImage.imageAsDataUrl" />
+              <div class="actionBtn">
+                <button type="button" class="btn btn-success mr-3">Please wait...</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="profileImage" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Profile Image Preview</button>
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+          <div class="card-body">
+            <div *ngIf="webcamImage || form.value.profileImagePath" class="snapshot">
+              <img *ngIf="webcamImage && !form.value.profileImagePath" class="show-snapshot"
+                [src]="webcamImage.imageAsDataUrl" />
+              <img *ngIf="!webcamImage && form.value.profileImagePath" class="show-snapshot" [src]="profileImagePath" />
+              <div class="actionBtn">
+                <button type="button" (click)="retakeImage()" class="btn btn-success mr-3">Retake</button>
+                <button type="button" (click)="nextToProfile()" class="btn btn-success">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="governmentIdImage" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Government Id</button>
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+          <div class="card-body">
+            <app-camera [showCameraButton]="showCameraButton" *ngIf="!governmentIdUploadedImage"
+              (pictureTaken)="handleGovernmentIdImage($event)">
+            </app-camera>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="governmentIdImagePreview" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Government Id Preview</button>
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+          <div class="card-body">
+            <div *ngIf="governmentIdUploadedImage || form.value.governmentIdUploadedImagePath" class="snapshot">
+              <img class="show-snapshot" *ngIf="governmentIdUploadedImage && !form.value.governmentIdUploadedImagePath"
+                [src]="governmentIdUploadedImage.imageAsDataUrl" />
+              <img *ngIf="!governmentIdUploadedImage && form.value.governmentIdUploadedImagePath" class="show-snapshot"
+                [src]="govermentIdImagePath" />
+              <div class="actionBtn">
+                <button type="button" (click)="retakeGovernmentIdUploadedImage()"
+                  class="btn btn-success mr-3">Retake</button>
+                <button type="button" (click)="nextToGovernmentId()" class="btn btn-success">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="itemImage" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Product Image</button>
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+          <div class="card-body">
+            <app-camera [showCameraButton]="showCameraButton" *ngIf="!itemUploadedImage"
+              (pictureTaken)="handleItemImage($event)">
+            </app-camera>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="itemImagePreview" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Product Preview</button>
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+          <div class="card-body">
+            <div *ngIf="itemUploadedImage || form.value.itemImageUploadedPath" class="snapshot">
+              <img class="show-snapshot" *ngIf="itemUploadedImage && !form.value.itemImageUploadedPath"
+                [src]="itemUploadedImage.imageAsDataUrl" />
+              <img *ngIf="!itemUploadedImage && form.value.itemImageUploadedPath" class="show-snapshot"
+                [src]="itemImagePath" />
+              <div class="actionBtn">
+                <button type="button" (click)="retakeItemdUploadedImage()" class="btn btn-success mr-3">Retake</button>
+                <button type="button" (click)="nextToItemImageUpload()" class="btn btn-success">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="qrcode" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Scan QR Code</button>
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+          <div class="card-body">
+            <div class="text-center">
+              <qrcode class="show-snapshot set-barcode-margin" [level]="1" size="400" [qrvalue]="qrCodeValue"></qrcode>
+            </div>
+            <!-- <p class="card-text"> -->
+            <h2>
+              Please scan the bardcode from your phone and proceed to Checkin. Barcode will be disabled in
+              {{timeLeft}}
+              seconds
+            </h2>
+            <!-- </p> -->
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="profile" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Profile</button>
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="nextToSummary()">
+              <div class="form-row">
+                <div class="form-group col-12">
+                  <input type="text" formControlName="name" placeholder="Name" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                  <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">Name required</div>
+                    <div *ngIf="f.name.errors.minlength">Name must be at least 4 character</div>
+                  </div>
+                </div>
+                <div class="form-group col-12">
+                  <input type="text" formControlName="contact" [readonly]="true" placeholder="Contact"
+                    class="form-control" />
+                </div>
+                <div class="form-group col-12">
+                  <input type="text" formControlName="email" placeholder="Email" class="form-control" />
+                </div>
+                <div class="form-group col-12">
+                  <input type="text" formControlName="companyFrom" placeholder="Company" class="form-control" />
+                </div>
+                <div class="form-group col-12">
+                  <ngx-select-dropdown [ngClass]="{ 'is-invalid': submitted && f.whomToMeet.errors }" tabindex="0"
+                    (change)="selectionChanged($event)" [multiple]="false" formControlName="whomToMeet"
+                    [config]="config" [options]="options"></ngx-select-dropdown>
+                  <div *ngIf="submitted && f.whomToMeet.errors" class="invalid-feedback">
+                    <div *ngIf="f.whomToMeet.errors.required">Please select</div>
+                  </div>
+                </div>
+                <div class="form-group col-12">
+                  <select id="isLaptop" formControlName="isLaptop" class="form-control">
+                    <option value="" selected>Laptop device</option>
+                    <option value=true>Yes</option>
+                    <option value=false>No</option>
+                  </select>
+                </div>
+                <div class="form-group col-12">
+                  <input *ngIf="form.value.isLaptop!='' && form.value.isLaptop!='false'" type="text"
+                    formControlName="serialNumber" placeholder="Laptop serial number" class="form-control" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-12 actionBtn">
+                  <button class="btn btn-success">
+                    Next
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="summary" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Summary</button>
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="form-row">
+                <div class="form-group col-12 text-center">
+                  Hi, <strong>{{form.value.name}}</strong>
+                </div>
+                <div class="form-group col-12">
+                  <div class="snapshot d-flex justify-content-center">
+                    <img *ngIf="!webcamImage && form.value.profileImagePath" class="show-snapshot-preview"
+                      [src]="profileImagePath" />
+                    <img *ngIf="webcamImage" class="show-snapshot-preview" [src]="webcamImage.imageAsDataUrl" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-12 actionBtn">
+                  <button class="btn btn-success">Confirm Checkin</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<ngx-spinner>
+  <p style="font-size: 20px; color: white">{{loaderSpinnerMessage}}</p>
+</ngx-spinner>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div *ngIf="image" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Check-out Image</button>
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+          <div class="card-body">
+            <app-camera *ngIf="!webcamImage" (pictureTaken)="handleImage($event)">
+            </app-camera>
+            <!-- <input type="file" *ngIf="!webcamImage" accept="image/*" capture="user"> -->
+            <!-- <input type="file" accept="image/*;capture=camera"> -->
+
+            <!-- <video id="player" controls autoplay></video> -->
+
+            <div class="snapshot" *ngIf="!webcamImage">
+              <div class="actionBtn">
+                <button type="button" class="btn btn-success mr-3">{{timeLeft + " seconds remaining"}}</button>
+              </div>
+            </div>
+            <div *ngIf="webcamImage" class="snapshot">
+              <img class="show-snapshot" [src]="webcamImage.imageAsDataUrl" />
+              <div class="actionBtn">
+                <button type="button" class="btn btn-success mr-3">Please wait...</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="contact" class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button class="btn btn-sm text-white float-left" (click)="redirect('home')">Cancel</button>
+            <button class="btn text-white">Checkout</button>
+            <button class="btn btn-sm text-white float-right" (click)="redirect('back')">Back</button>
+          </div>
+        </div>
+        <form [formGroup]="form">
+          <div class="form-row mt-4">
+            <div class="form-group col-12 mb-5">
+              <input type="text" formControlName="contact" placeholder="Enter mobile number here"
+                class="form-control form-control-lg text-center"
+                [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" />
+              <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+                <div *ngIf="f.contact.errors.required">Mobile number required</div>
+                <div *ngIf="f.contact.errors.minlength">Mobile number must be at least 10 digit</div>
+              </div>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-left col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(1)">1</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button type="button" class="col-sm btn btn-light btn-circle btn-x2" (click)="numberEvent(2)">2</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-right col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(3)">3</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-left col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(4)">4</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button type="button" class="col-sm btn btn-light btn-circle btn-x2" (click)="numberEvent(5)">5</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-right col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(6)">6</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-left col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(7)">7</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button type="button" class="col-sm btn btn-light btn-circle btn-x2" (click)="numberEvent(8)">8</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-right col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(9)">9</button>
+            </div>
+            <div class="form-group col-4">
+              <button class="float-left col-sm btn btn-circle btn-error" (click)="numberEvent('delete')">Del</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button class="col-sm btn btn-light btn-circle btn-x2" (click)="numberEvent(0)">0</button>
+            </div>
+            <div class="form-group col-4">
+              <button class="float-right col-sm btn btn-circle btn-success" (click)="numberEvent('go')">Go</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

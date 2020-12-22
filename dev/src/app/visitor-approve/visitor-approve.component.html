@@ -1,0 +1,78 @@
+<ngx-spinner>
+  <p style="font-size: 20px; color: white">{{loaderSpinnerMessage}}</p>
+</ngx-spinner>
+<div class="main-content">
+  <div class="container-fluid" *ngIf="isData">
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header heading-footer"></div>
+          <div class="card-block text-center">
+            <img class="panel-profile-img rounded-circle" [src]="data.profileImagePath">
+            <p class="author-title"><strong>{{ data.name ? data.name : 'NA'}}</strong></p>
+            <div class="card-body">
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <label><strong>Contact:</strong> </label>
+                  <p>{{ data.contact ? data.contact : 'NA'}}</p>
+                </div>
+                <div class="form-group col-6">
+                  <label><strong>Email: </strong></label>
+                  <p>{{ data.email ? data.email : 'NA'}}</p>
+                </div>
+                <div class="form-group col-6">
+                  <label><strong>Company from: </strong></label>
+                  <p>{{ data.companyFrom ? data.companyFrom : 'NA'}}</p>
+                </div>
+                <div class="form-group col-6">
+                  <label> <strong>Checkin Date:</strong> </label>
+                  <p>{{ data.createdAt ? (data.createdAt | date: 'mediumDate') : 'NA'}}</p>
+                </div>
+                <div class="form-group col-6">
+                  <label><strong> Checkin Time:</strong> </label>
+                  <p>{{ data.createdAt ? (data.createdAt | date: 'shortTime') : 'NA'}}</p>
+                </div>
+                <div class="form-group col-6">
+                  <label><strong> Laptop Serial Number: </strong></label>
+                  <p> {{ data.serialNumber ? data.serialNumber : 'NA'}}</p>
+                </div>
+                <div class="form-group col-6">
+                  <label><strong> Category:</strong> </label>
+                  <p>{{ data.visitorCategory && data.visitorCategory!==null ? data.visitorCategory.name : 'NA'}}</p>
+                </div>
+                <div *ngIf="data.governmentIdUploadedImagePath && data.governmentIdUploadedImagePath!=null"
+                  class="form-group col-6">
+                  <label><strong>Government Id:</strong> </label>
+                  <p>
+                    <a target="_blank" [href]="data.governmentIdUploadedImagePath">
+                      <img class="panel-other-img rounded-square" [src]="data.governmentIdUploadedImagePath">
+                    </a>
+                  </p>
+                </div>
+                <div *ngIf="data.itemImageUploadedPath && data.itemImageUploadedPath!=null" class="form-group col-6">
+                  <label><strong>Item/Product:</strong> </label>
+                  <p>
+                    <a target="_blank" [href]="data.itemImageUploadedPath">
+                      <img class="panel-other-img rounded-square" [src]="data.itemImageUploadedPath">
+                    </a>
+                  </p>
+                </div>
+                <div class="form-group col-6" *ngIf="data.approvalStatus && data.approvalStatus !== null">
+                  <label><strong> Status:</strong> </label>
+                  <p>{{ data.approvalStatus | titlecase }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="!data.approvalStatus || data.approvalStatus === null">
+      <div class="col-lg-12 mt-2 mb-2">
+        <button type="button" (click)="approvalStatus('approved')" class="btn btn-success float-right">Approve</button>
+        <button type="button" (click)="approvalStatus('disapproved')"
+          class="btn btn-danger float-right mr-2">Disapprove</button>
+      </div>
+    </div>
+  </div>
+</div>

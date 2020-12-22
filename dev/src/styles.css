@@ -1,0 +1,59 @@
+html,
+body {
+  height: 100%;
+}
+a {
+  cursor: pointer;
+}
+.actionBtn {
+  font-size: 3em;
+  cursor: pointer;
+  text-align: center;
+}
+.flex-height {
+  height: 100vh;
+}
+.btn-circle.btn-xl {
+  width: 150px;
+  height: 150px;
+  padding: 10px 16px;
+  border-radius: 75px;
+  border: 5px solid #89b1dd;
+  font-size: 12px;
+  text-align: center;
+  background-color: transparent;
+  margin-top: 125px;
+}
+.btn-circle.btn-x2 {
+  width: 80px;
+  height: 80px;
+  padding: 10px 16px;
+  border-radius: 50px;
+  border: 2px solid rgba(58, 216, 241, 0.3);
+  font-size: 12px;
+  text-align: center;
+  background-color: transparent;
+  font-size: 30px;
+}
+.btn-circle.btn-success {
+  width: 80px;
+  height: 80px;
+  padding: 10px 16px;
+  border-radius: 50px;
+  border: 2px solid rgba(58, 216, 241, 0.3);
+  font-size: 12px;
+  text-align: center;
+  background-color: #0bdd0b;
+  font-size: 30px;
+}
+.btn-circle.btn-error {
+  width: 80px;
+  height: 80px;
+  padding: 10px 16px;
+  border-radius: 50px;
+  border: 2px solid rgba(58, 216, 241, 0.3);
+  font-size: 12px;
+  text-align: center;
+  background-color: #f12d2d;
+  font-size: 30px;
+}

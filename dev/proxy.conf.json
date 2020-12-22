@@ -1,0 +1,8 @@
+{
+  "/api": {
+      "target": "https://localhost:3000/api/v1/",
+      "changeOrigin": true,
+      "logLevel": "debug",
+      "pathRewrite": { "^/api" : "" }
+  }
+}

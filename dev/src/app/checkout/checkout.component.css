@@ -1,0 +1,24 @@
+span {
+  position: absolute;
+  margin-left: 10px;
+  /* height: 25px; */
+  display: flex;
+  align-items: center;
+  margin-top: 14px;
+}
+input {
+  padding-left: 25px;
+  /* height: 20px; */
+}
+.show-snapshot {
+  vertical-align: middle;
+  border-style: none;
+  width: 100% !important;
+  height: 100% !important;
+}
+.show-snapshot-preview {
+  vertical-align: middle;
+  border-style: none;
+  width: 50% !important;
+  height: 50% !important;
+}

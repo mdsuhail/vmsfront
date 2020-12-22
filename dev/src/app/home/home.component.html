@@ -1,0 +1,40 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="background">
+        <div class="home-page-message">
+          Welcome to {{currentCompany ? currentCompany.name : 'TechNEXA Technologies'}}
+          <div class="dropdown float-left ml-2">
+            <button type="button" class="btn btn-primary-outline dropdown-toggle" data-toggle="dropdown">
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" (click)="logout()">Logout</a>
+            </div>
+          </div>
+        </div>
+        <div class="home-page-message">
+          <img id="Viztors" alt="Viztors" title="Viztors" class="rounded" [src]="logoUrl" height="30px">
+        </div>
+        <div>
+          <!-- <video id="video" autoplay style="display:none"></video>
+          <canvas style="display:none" id="canvas"></canvas> -->
+          <!-- <div id="disp"><canvas id="comp"></canvas></div> -->
+          <video id="home_video" style="display:none" autoplay></video>
+          <canvas id="home_canvas" style="width:840px; height: 400px;display:none;"></canvas>
+        </div>
+        <div class="text-center ml-5">
+          <button type="button" (click)="checkOut()" class="btn btn-light btn-circle btn-xl mr-4">
+            <div class="check-in">Check-out</div>
+          </button>
+          <button type="button" (click)="checkIn()" class="btn btn-light btn-circle btn-xl">
+            <div class="check-in">Check-in</div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p>Powered by <img id="Viztors" alt="Viztors" title="Viztors" class="rounded ml-1 pb-1"
+        src="./assets/img/viztorslogo.png" height="30px"></p>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+.show-snapshot {
+  vertical-align: middle;
+  border-style: none;
+  width: 100% !important;
+  height: 100% !important;
+}
+.show-snapshot-preview {
+  vertical-align: middle;
+  border-style: none;
+  width: 50% !important;
+  height: 50% !important;
+}
+.item {
+  width: 200px;
+  text-align: center;
+  display: block;
+  background-color: transparent;
+  border: 1px solid transparent;
+  margin-right: 10px;
+  margin-bottom: 1px;
+  float: left;
+}
+.set-barcode-margin {
+  margin-left: 120px;
+}

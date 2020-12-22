@@ -1,0 +1,142 @@
+<ngx-spinner>
+  <p style="font-size: 20px; color: white">{{loaderSpinnerMessage}}</p>
+</ngx-spinner>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row mt-2">
+      <div *ngIf="showPhoneForm" class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button [routerLink]="['home']" class="btn btn-sm text-white float-left">Cancel</button>
+            <button class="btn text-white">Mobile Number</button>
+            <button class="btn btn-sm text-white float-right" (click)="backClicked()">Back</button>
+          </div>
+        </div>
+        <form [formGroup]="form">
+          <div class="form-row mt-4">
+            <div class="form-group col-12 mb-5">
+              <input type="text" formControlName="contact" placeholder="Enter here"
+                class="form-control form-control-lg text-center"
+                [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" />
+              <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+                <div *ngIf="f.contact.errors.required">Mobile number required</div>
+                <div *ngIf="f.contact.errors.minlength">Mobile number must be at least 10 digit</div>
+              </div>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-left col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(1)">1</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button type="button" class="col-sm btn btn-light btn-circle btn-x2" (click)="numberEvent(2)">2</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-right col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(3)">3</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-left col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(4)">4</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button type="button" class="col-sm btn btn-light btn-circle btn-x2" (click)="numberEvent(5)">5</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-right col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(6)">6</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-left col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(7)">7</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button type="button" class="col-sm btn btn-light btn-circle btn-x2" (click)="numberEvent(8)">8</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-right col-sm btn btn-light btn-circle btn-x2"
+                (click)="numberEvent(9)">9</button>
+            </div>
+            <div class="form-group col-4">
+              <button class="float-left col-sm btn btn-circle btn-error" (click)="numberEvent('delete')">Del</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button class="col-sm btn btn-light btn-circle btn-x2" (click)="numberEvent(0)">0</button>
+            </div>
+            <div class="form-group col-4">
+              <button class="float-right col-sm btn btn-circle btn-success" (click)="numberEvent('go')">Go</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="showOtpForm" class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger bg-danger text-center">
+            <button [routerLink]="['home']" class="btn btn-sm text-white float-left">Cancel</button>
+            <button class="btn text-white">OTP</button>
+            <button class="btn btn-sm text-white float-right" (click)="backClicked()">Back</button>
+          </div>
+        </div>
+        <form [formGroup]="formOtp">
+          <div class="form-row mt-4">
+            <div class="form-group col-12 mb-5">
+              <input type="text" formControlName="otp" placeholder="Enter OTP"
+                class="form-control form-control-lg text-center"
+                [ngClass]="{ 'is-invalid': submittedOtp && g.otp.errors }" />
+              <div *ngIf="submittedOtp && g.otp.errors" class="invalid-feedback">
+                <div *ngIf="g.otp.errors.required">OTP required</div>
+                <div *ngIf="g.otp.errors.minlength">OTP must be 4 digit</div>
+              </div>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-left col-sm btn btn-light btn-circle btn-x2"
+                (click)="otpVerificationEvent(1)">1</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button type="button" class="col-sm btn btn-light btn-circle btn-x2"
+                (click)="otpVerificationEvent(2)">2</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-right col-sm btn btn-light btn-circle btn-x2"
+                (click)="otpVerificationEvent(3)">3</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-left col-sm btn btn-light btn-circle btn-x2"
+                (click)="otpVerificationEvent(4)">4</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button type="button" class="col-sm btn btn-light btn-circle btn-x2"
+                (click)="otpVerificationEvent(5)">5</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-right col-sm btn btn-light btn-circle btn-x2"
+                (click)="otpVerificationEvent(6)">6</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-left col-sm btn btn-light btn-circle btn-x2"
+                (click)="otpVerificationEvent(7)">7</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button type="button" class="col-sm btn btn-light btn-circle btn-x2"
+                (click)="otpVerificationEvent(8)">8</button>
+            </div>
+            <div class="form-group col-4">
+              <button type="button" class="float-right col-sm btn btn-light btn-circle btn-x2"
+                (click)="otpVerificationEvent(9)">9</button>
+            </div>
+            <div class="form-group col-4">
+              <button class="float-left col-sm btn btn-circle btn-error"
+                (click)="otpVerificationEvent('delete')">Del</button>
+            </div>
+            <div class="form-group col-4 text-center">
+              <button class="col-sm btn btn-light btn-circle btn-x2" (click)="otpVerificationEvent(0)">0</button>
+            </div>
+            <div class="form-group col-4">
+              <button class="float-right col-sm btn btn-circle btn-success"
+                (click)="otpVerificationEvent('verify')">Go</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

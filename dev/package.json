@@ -28,7 +28,7 @@
     "an-qrcode": "^1.0.3",
     "bootstrap": "^4.4.1",
     "handtrackjs": "0.0.13",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ngx-select-dropdown": "^1.4.0",
     "ngx-spinner": "^9.0.1",
     "ngx-toastr": "^10.0.4",
